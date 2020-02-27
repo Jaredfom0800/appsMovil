@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 
 import {
-  StyleSheet,
+  StyleSheet,ActivityIndicator
 } from 'react-native';
 
 
@@ -16,7 +16,9 @@ class Perfil extends Component {
           return (
     <>
        <Container>
+       
         <Content padder contentContainerStyle = {misEstilos.content}>
+        
           <Card>
             <CardItem header bordered style = {misEstilos.body}>
               <Text style = {misEstilos.textCenter} >Bienvenido</Text>
