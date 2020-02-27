@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button,Container, View, Content, Card, CardItem, Text, Body, Item, Label, Input, Icon } from "native-base";
-import { StyleSheet } from 'react-native';
+import { StyleSheet,ActivityIndicator } from 'react-native';
 
 
 
@@ -12,55 +12,73 @@ class Login extends Component {
     super(props);
     this.state={usuario:'',pass:''};
   }
+  
+  state = {showIndicator:false}
+  onButtonPress = () => {
+    this.setState({
+      showIndicator: true
+    }),this.props.navigation.navigate('Perfil',{pass: this.state.pass, usuario: this.state.usuario})};
 
+    
   render(){
-  const navegar = this.props.navigation;
-  return (
-    <>
-       <Container>
-        <Content padder contentContainerStyle = {misEstilos.content}>
-          <Card>
-            <CardItem header bordered style= {misEstilos.textoA}>
-              <Text style = {misEstilos.textCenter} >Iniciar Sesión</Text>
-            </CardItem>
-            <CardItem bordered style= {misEstilos.datos}>
-              <Body style = {misEstilos.body}>
-                  <Item floatingLabel>
-                      <Icon type = 'FontAwesome' name='user-circle-o'></Icon>
-                      <Label> Nombre de usuario</Label>
-                    <Input type="text" value={this.state.usuario}
-                    onChangeText={(usuario)=> this.setState({usuario})}
-                    />
-                  </Item>
-                  <Text></Text>
-                  <Item floatingLabel>
-                    <Icon primary type = 'FontAwesome' name='lock'></Icon>
-                    <Label> Contraseña</Label>
-                    <Input type="password" value={this.state.pass}
-                    onChangeText={(pass)=> this.setState({pass})}/>                 
-                    <Input type="password" value={this.state.pass}
-                    onChangeText={(pass)=> this.setState({pass})}/>
-                  </Item>
-                  <Item floatingLabel>
-                <Input /*  value={this.state.password} textContentType={'password'} multiline={false} secureTextEntry={true} 
-               onChangeText={(text) => { this._savePassword(text); this.setState({ password: text }); }} 
-               placeholder='Github password'*/ />
-                  </Item>
-              </Body>
-            </CardItem>
-            <CardItem footer bordered style = { misEstilos.pie}>
-           
-               <Button dark style= {misEstilos.textCenter} onPress={() => 
-                navegar.navigate('Perfil',{pass: this.state.pass, usuario: this.state.usuario})}>
-                 <Text style={misEstilos.TextoBtn}>Aceptar</Text></Button>
-            </CardItem>
-          </Card>
-        </Content>
-      </Container>
-     
+
+    if(this.state.showIndicator){
+      return (
+        <View style={misEstilos.content}>
+          <ActivityIndicator size="large" color="#36FF0E" />
+        </View>
+      );  
+    }else{
       
-    </>
-  );
+      return (
+        <>
+           <Container>
+            <Content padder contentContainerStyle = {misEstilos.content}>
+              <Card>
+                <CardItem header bordered style= {misEstilos.textoA}>
+                  <Text style = {misEstilos.textCenter} >Iniciar Sesión</Text>
+                </CardItem>
+                <CardItem bordered style= {misEstilos.datos}>
+                  <Body style = {misEstilos.body}>
+                      <Item floatingLabel>
+                          <Icon type = 'FontAwesome' name='user-circle-o'></Icon>
+                          <Label> Nombre de usuario</Label>
+                        <Input type="text" value={this.state.usuario}
+                        onChangeText={(usuario)=> this.setState({usuario})}
+                        />
+                      </Item>
+                      <Text></Text>
+                      <Item floatingLabel>
+                        <Icon primary type = 'FontAwesome' name='lock'></Icon>
+                        <Label> Contraseña</Label>
+                        <Input type="password" value={this.state.pass}
+                        onChangeText={(pass)=> this.setState({pass})}/>                 
+                        <Input type="password" value={this.state.pass}
+                        onChangeText={(pass)=> this.setState({pass})}/>
+                      </Item>
+                      <Item floatingLabel>
+                    <Input /*  value={this.state.password} textContentType={'password'} multiline={false} secureTextEntry={true} 
+                   onChangeText={(text) => { this._savePassword(text); this.setState({ password: text }); }} 
+                   placeholder='Github password'*/ />
+                      </Item>
+                  </Body>
+                </CardItem>
+                <CardItem footer bordered style = { misEstilos.pie}>
+               
+                   <Button dark style= {misEstilos.textCenter} 
+                     onPress={this.onButtonPress}>
+                     <Text style={misEstilos.TextoBtn}>Aceptar</Text></Button>
+                     
+                </CardItem>
+              </Card>
+            </Content>
+          </Container>
+         
+          
+        </>
+      );
+    }
+  
 }
 };
 
