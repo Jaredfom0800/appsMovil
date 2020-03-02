@@ -5,20 +5,29 @@ import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 
 import {
-  StyleSheet,ActivityIndicator
+  StyleSheet,ActivityIndicator,Switch
 } from 'react-native';
 
 
 
+
 class Perfil extends Component {
+
+  state = {switch1Value:false}
+
+
+
+  toggleSwitch1=(value) => {
+    this.setState({switch1Value:value})
+    console.log('Switch 1 is: '+value)
+  }
+
   render(){
     const navegar = this.props.navigation;
           return (
     <>
        <Container>
-       
         <Content padder contentContainerStyle = {misEstilos.content}>
-        
           <Card>
             <CardItem header bordered style = {misEstilos.body}>
               <Text style = {misEstilos.textCenter} >Bienvenido</Text>
@@ -28,6 +37,10 @@ class Perfil extends Component {
             </CardItem>
             <CardItem footer bordered style = { misEstilos.pie}>
           <Text style={misEstilos.textCenter}>Tu password es : {this.props.route.params.pass}</Text>
+            </CardItem>
+            <CardItem footer bordered style = { misEstilos.pie}>
+            <Switch onValueChange = {this.toggleSwitch1} value={this.state.switch1Value}/>
+          <Text style={misEstilos.pie}>{this.state.switch1Value ?'Prendido':'Apagado'}</Text>
             </CardItem>
             <CardItem footer bordered style = { misEstilos.pie}>
             <Button dark style= {misEstilos.centrar} onPress={() => 
@@ -83,6 +96,11 @@ const misEstilos = StyleSheet.create({
     flex: 1,
     justifyContent:'center',
     //marginLeft: '70%',
+  },
+  switch:{
+    flex:1,
+    alignItems:'center',
+    marginTop:1000
   },
 });
 
