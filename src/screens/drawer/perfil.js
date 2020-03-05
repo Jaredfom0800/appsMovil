@@ -44,6 +44,10 @@ class Perfil extends Component {
             </CardItem>
             <CardItem footer bordered style = { misEstilos.pie}>
             <Button dark style= {misEstilos.centrar} onPress={() => 
+                navegar.navigate('Movies')}><Text>Peliculas</Text></Button>
+            </CardItem>
+            <CardItem footer bordered style = { misEstilos.pie}>
+            <Button dark style= {misEstilos.centrar} onPress={() => 
                 navegar.navigate('Inicio de sesión')}><Text>Salir</Text></Button>
             </CardItem>
           </Card>
