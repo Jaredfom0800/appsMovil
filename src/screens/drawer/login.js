@@ -26,7 +26,7 @@ class Login extends Component {
     }),this.props.navigation.navigate('Perfil')};
 
 
-   userLog = () =>{ 
+   Login = () =>{ 
     const {usuario} = this.state;
     const {pass} = this.state;
 
@@ -105,7 +105,7 @@ class Login extends Component {
                 <CardItem footer bordered style = { misEstilos.pie}>
                
                    <Button dark style= {misEstilos.textCenter} 
-                     onPress={this.userLog}>
+                     onPress={this.Login}>
                      <Text style={misEstilos.TextoBtn}>Aceptar</Text></Button>
                      
                 </CardItem>

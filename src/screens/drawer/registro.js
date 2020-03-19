@@ -18,7 +18,7 @@ class Registro extends Component {
     }
   }
 
-  userRegister = () =>{ 
+  Registro = () =>{ 
     const {usuario} = this.state;
     const {pass} = this.state;
 
@@ -81,7 +81,7 @@ class Registro extends Component {
               </Body>
             </CardItem>
             <CardItem footer bordered style = { misEstilos.pie}>
-            <Button dark  style = { misEstilos.btn}onPress={this.userRegister}><Text>Aceptar</Text></Button>
+            <Button dark  style = { misEstilos.btn}onPress={this.Registro}><Text>Aceptar</Text></Button>
             </CardItem>
             <CardItem footer bordered style = {misEstilos.body}>
               <Button primary style={misEstilos.btn}><Icon type = 'Entypo' name = 'facebook'></Icon></Button>
