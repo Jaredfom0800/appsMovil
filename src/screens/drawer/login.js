@@ -14,7 +14,8 @@ class Login extends Component {
   constructor(props){
     super(props);
     this.state={usuario:'', 
-    pass:''};
+    pass:''
+  }
   }
 
   
@@ -24,16 +25,12 @@ class Login extends Component {
       showIndicator: true
     }),this.props.navigation.navigate('Perfil')};
 
-    state = {switchValue:false}
-    toggleSwitch = (value) => {
-      this.setState({switchValue: value})
-   }
 
    userLog = () =>{ 
     const {usuario} = this.state;
     const {pass} = this.state;
 
-    fetch('http://192.168.8.2/react/login.php',{ 
+    fetch('http://192.168.8.23/react/login.php',{ 
       method: 'post',
       header: {
         'Accept': 'application/json',

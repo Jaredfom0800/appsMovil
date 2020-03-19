@@ -5,11 +5,51 @@ import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 
 import {
-  StyleSheet,
+  StyleSheet,Alert
 } from 'react-native';
 
 
 class Registro extends Component {
+  
+  constructor(props){
+    super(props);
+    this.state={usuario:'',
+      pass:''
+    }
+  }
+
+  userRegister = () =>{ 
+    const {usuario} = this.state;
+    const {pass} = this.state;
+
+    fetch('http://192.168.8.23/react/registrar.php',{ 
+      method: 'post',
+      header: {
+        'Accept': 'applicaion/json',
+        'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+        pUsuario: usuario,
+        pPass: pass
+      })
+
+    })
+    .then((response) => response.text())
+      .then((responseData) =>{
+        if(responseData==1){
+          Alert.alert("Registrado");
+        }else{
+          Alert.alert("Error al registrar");
+        }
+      })
+      .catch((error)=>{
+          console.error(error);
+      });
+  }
+
+
+
+
   render(){
           return (
     <>
@@ -24,7 +64,7 @@ class Registro extends Component {
               <Body style = {misEstilos.body}>
                   <Item lineLabel>
                       <Icon type = 'Feather' name = 'user'></Icon>
-                      <Input placeholder = 'Nombre'/>
+                      <Input placeholder = 'Nombre'  onChangeText={usuario=> this.setState({usuario})}/>
                     </Item> 
                   <Item lineLabel>
                     <Icon type = 'MaterialIcons' name = 'email'></Icon>
@@ -32,7 +72,7 @@ class Registro extends Component {
                   </Item>
                   <Item lineLabel>
                     <Icon type = 'Ionicons' name = 'ios-lock'></Icon>
-                    <Input placeholder = 'Constraseña'/>
+                    <Input placeholder = 'Constraseña'  onChangeText={pass => this.setState({pass})}/>
                   </Item>
                     <Item lineLabel>
                         <Icon type = 'Ionicons' name = 'ios-lock'></Icon>
@@ -41,7 +81,7 @@ class Registro extends Component {
               </Body>
             </CardItem>
             <CardItem footer bordered style = { misEstilos.pie}>
-            <Button dark  style = { misEstilos.btn}><Text> Registrarte</Text></Button>
+            <Button dark  style = { misEstilos.btn}onPress={this.userRegister}><Text>Aceptar</Text></Button>
             </CardItem>
             <CardItem footer bordered style = {misEstilos.body}>
               <Button primary style={misEstilos.btn}><Icon type = 'Entypo' name = 'facebook'></Icon></Button>
