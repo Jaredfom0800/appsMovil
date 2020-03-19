@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+//https://gateway.marvel.com:443/v1/public/characters?name=Avengers&apikey=fec608dfd4a7a9acb339c68e2264d7cf
+
+
 import Inicio from "./src/inicio";
 
 import Screen1 from './src/screens/drawer/screen1';
@@ -10,6 +13,7 @@ import Login from './src/screens/drawer/login';
 import Registro from './src/screens/drawer/registro';
 import Perfil from './src/screens/drawer/perfil';
 import Movies from './src/screens/drawer/movies';
+import Comics from './src/screens/drawer/comics';
 
 
 
@@ -33,6 +37,7 @@ export default class App extends Component {
     <Stack.Screen name="Registro" component = {Registro}></Stack.Screen>
     <Stack.Screen name="Perfil" component = {Perfil}></Stack.Screen>
     <Stack.Screen name="Movies" component = {Movies}></Stack.Screen>
+    <Stack.Screen name="Comics" component = {Comics}></Stack.Screen>
   </Stack.Navigator>
   render(){
    

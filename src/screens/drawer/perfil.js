@@ -33,10 +33,10 @@ class Perfil extends Component {
               <Text style = {misEstilos.textCenter} >Bienvenido</Text>
             </CardItem>
             <CardItem footer bordered style = { misEstilos.pie}>
-          <Text style={misEstilos.textCenter}>Usuario : {this.props.route.params.usuario}</Text>
+          <Text style={misEstilos.textCenter}>Usuario : </Text>
             </CardItem>
             <CardItem footer bordered style = { misEstilos.pie}>
-          <Text style={misEstilos.textCenter}>Tu password es : {this.props.route.params.pass}</Text>
+          <Text style={misEstilos.textCenter}>Tu password es : </Text>
             </CardItem>
             <CardItem footer bordered style = { misEstilos.pie}>
             <Switch onValueChange = {this.toggleSwitch1} value={this.state.switch1Value}/>
@@ -45,6 +45,10 @@ class Perfil extends Component {
             <CardItem footer bordered style = { misEstilos.pie}>
             <Button dark style= {misEstilos.centrar} onPress={() => 
                 navegar.navigate('Movies')}><Text>Peliculas</Text></Button>
+            </CardItem>
+            <CardItem footer bordered style = { misEstilos.pie}>
+            <Button dark style= {misEstilos.centrar} onPress={() => 
+                navegar.navigate('Comics')}><Text>Comics</Text></Button>
             </CardItem>
             <CardItem footer bordered style = { misEstilos.pie}>
             <Button dark style= {misEstilos.centrar} onPress={() => 

@@ -1,25 +1,68 @@
 import React, { Component } from "react";
 import { Button,Container, View, Content, Card, CardItem, Text, Body, Item, Label, Input, Icon } from "native-base";
-import { StyleSheet,ActivityIndicator } from 'react-native';
-
+import { StyleSheet,ActivityIndicator,AppRegistry,
+  Alert} from 'react-native';
+import { api } from '../../api'
 
 
 
 
 class Login extends Component {
 
+
+
   constructor(props){
     super(props);
-    this.state={usuario:'',pass:''};
+    this.state={usuario:'', 
+    pass:''};
   }
+
   
   state = {showIndicator:false}
   onButtonPress = () => {
     this.setState({
       showIndicator: true
-    }),this.props.navigation.navigate('Perfil',{pass: this.state.pass, usuario: this.state.usuario})};
+    }),this.props.navigation.navigate('Perfil')};
 
-    
+    state = {switchValue:false}
+    toggleSwitch = (value) => {
+      this.setState({switchValue: value})
+   }
+
+   userLog = () =>{ 
+    const {usuario} = this.state;
+    const {pass} = this.state;
+
+    fetch('http://192.168.8.2/react/login.php',{ 
+      method: 'post',
+      header: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+        pUsuario: usuario,
+        pPass: pass
+      })
+
+    })
+    .then((response) => response.text())
+      .then((responseData) =>{
+        if(responseData == 1){
+             this.props.navigation.navigate('Perfil');
+        }else{
+          Alert.alert("Usuario o contraseña incorrectos")
+        }
+        
+      })
+      .catch((error)=>{
+          console.error(error);
+      });
+  } 
+
+
+
+
+
   render(){
 
     if(this.state.showIndicator){
@@ -52,8 +95,6 @@ class Login extends Component {
                         <Icon primary type = 'FontAwesome' name='lock'></Icon>
                         <Label> Contraseña</Label>
                         <Input type="password" value={this.state.pass}
-                        onChangeText={(pass)=> this.setState({pass})}/>                 
-                        <Input type="password" value={this.state.pass}
                         onChangeText={(pass)=> this.setState({pass})}/>
                       </Item>
                       <Item floatingLabel>
@@ -61,12 +102,13 @@ class Login extends Component {
                    onChangeText={(text) => { this._savePassword(text); this.setState({ password: text }); }} 
                    placeholder='Github password'*/ />
                       </Item>
+                      
                   </Body>
                 </CardItem>
                 <CardItem footer bordered style = { misEstilos.pie}>
                
                    <Button dark style= {misEstilos.textCenter} 
-                     onPress={this.onButtonPress}>
+                     onPress={this.userLog}>
                      <Text style={misEstilos.TextoBtn}>Aceptar</Text></Button>
                      
                 </CardItem>
